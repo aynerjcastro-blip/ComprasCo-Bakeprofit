@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Logs fxm y yml ###
+logback.xml
+application-local.properties
+
+
