@@ -1,7 +1,7 @@
 package com.comprasco.bakeprofit.entity;
 
-public enum Rol {
-    USUARIO,
+public enum Role {
+    USER,
     ADMIN,
-    PROVEEDOR
+    SUPPLIER
 }
