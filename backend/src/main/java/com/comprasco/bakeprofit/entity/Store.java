@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Category {
+public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +25,9 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    private LocalDateTime registrationDate = LocalDateTime.now();
+    private String city;
 
+    private Boolean active = true;
+
+    private LocalDateTime registrationDate = LocalDateTime.now();
 }
