@@ -1,11 +1,13 @@
 package com.comprasco.bakeprofit.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.comprasco.bakeprofit.entity.Role;
 import com.comprasco.bakeprofit.entity.User;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.relation.Role;
+
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
