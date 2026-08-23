@@ -5,6 +5,8 @@ import com.comprasco.bakeprofit.entity.User;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.relation.Role;
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
@@ -15,6 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByActiveFalse();
 
-    List<User> findByRole(String rol);
+    List<User> findByRole(Role role);
 
 }
