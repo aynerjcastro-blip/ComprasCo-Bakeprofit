@@ -1,0 +1,72 @@
+
+* {
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+#HeaderH1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    gap: 20px; 
+    align-items: center;
+    margin-right: 20px;
+}
+
+#PreciosCo {
+    color: black;
+    text-decoration: none;
+}
+
+#Nav-Options ul {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    list-style: none; 
+    margin: 0;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+#Nav-Options a {
+    text-decoration: none;
+    color: inherit;
+}
+
+footer {
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    
+  
+    #HeaderH1 {
+        padding: 10px 10px;
+    }
+
+    .header-actions {
+        gap: 15px;
+        margin-right: 5px; 
+    }
+
+    #HeaderH1 h1 {
+        font-size: 1.4rem; 
+    }
+
+
+    #Nav-Options {
+        display: none; 
+    }
+}
