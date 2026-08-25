@@ -1,12 +1,16 @@
 package com.comprasco.bakeprofit.service;
 
+import com.comprasco.bakeprofit.config.JwtSecurity;
+import com.comprasco.bakeprofit.dto.AuthResponse;
+import com.comprasco.bakeprofit.dto.LoginRequest;
+import com.comprasco.bakeprofit.dto.RegisterRequest;
 import com.comprasco.bakeprofit.entity.Role;
 import com.comprasco.bakeprofit.entity.User;
 import com.comprasco.bakeprofit.exception.EmailAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.InvalidCredentialsException;
 import com.comprasco.bakeprofit.exception.UserNotFoundException;
 import com.comprasco.bakeprofit.repository.UserRepository;
-
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,13 +23,15 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtSecurity jwtSecurity;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, JwtSecurity jwtSecurity) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtSecurity = jwtSecurity;
     }
 
-    /* ============ CONSULTAS ============ */
+    /* CONSULTAS */
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -45,18 +51,18 @@ public class UserService {
         return userRepository.findByRole(role);
     }
 
-    /* ============ REGISTRO / AUTH ============ */
+    /* REGISTRO / AUTH */
 
     @Transactional
-    public User register(String name, String email, String rawPassword, Role role) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            throw new EmailAlreadyExistsException(email); // ← 409 CONFLICT
+    public User register(RegisterRequest request) {
+        if (userRepository.findByEmail(request.email()).isPresent()) {
+            throw new EmailAlreadyExistsException(request.email()); // ← 409 CONFLICT
         }
 
         User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setName(request.name());
+        user.setEmail(request.email());
+        user.setPassword(passwordEncoder.encode(request.password()));
         user.setRole(Role.USER);
 
         return userRepository.save(user);
@@ -87,5 +93,18 @@ public class UserService {
     public void activateUser(Long id) {
         User user = findById(id);
         user.setActive(true);
+    }
+
+    
+    public AuthResponse login(LoginRequest request) {
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(() -> new BadCredentialsException("Credenciales inválidas"));
+        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+            throw new BadCredentialsException("Credenciales Invalidas");
+        }
+
+        String token = jwtSecurity.generateToken(user.getEmail(), user.getRole().name());
+
+        return new AuthResponse(token, user.getName(), user.getEmail(), user.getRole());
     }
 }
