@@ -1,0 +1,17 @@
+$kind: http-request
+name: POST Register - Exito
+description: ""
+url: http://localhost:8080/api/auth/register
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Jose David\",\r
+
+    \  \"email\": \"castro@gmail.com\",\r
+
+    \  \"password\": \"123541213\"\r
+
+    }"
+order: 3525958979036508

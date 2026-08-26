@@ -7,6 +7,6 @@ package com.comprasco.bakeprofit.exception;
 public class EmailAlreadyExistsException extends RuntimeException {
 
     public EmailAlreadyExistsException(String email) {
-        super("El email ya está registrado: " + email);
+        super("El email ya esta registrado: " + email);
     }
 }

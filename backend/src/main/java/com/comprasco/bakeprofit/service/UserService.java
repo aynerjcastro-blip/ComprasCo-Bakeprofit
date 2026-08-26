@@ -98,9 +98,9 @@ public class UserService {
     
     public AuthResponse login(LoginRequest request) {
         User user = userRepository.findByEmail(request.email())
-                .orElseThrow(() -> new BadCredentialsException("Credenciales inválidas"));
+                .orElseThrow(() -> new InvalidCredentialsException());
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            throw new BadCredentialsException("Credenciales Invalidas");
+            throw new InvalidCredentialsException();
         }
 
         String token = jwtSecurity.generateToken(user.getEmail(), user.getRole().name());
