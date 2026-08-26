@@ -10,7 +10,6 @@ import com.comprasco.bakeprofit.exception.EmailAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.InvalidCredentialsException;
 import com.comprasco.bakeprofit.exception.UserNotFoundException;
 import com.comprasco.bakeprofit.repository.UserRepository;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

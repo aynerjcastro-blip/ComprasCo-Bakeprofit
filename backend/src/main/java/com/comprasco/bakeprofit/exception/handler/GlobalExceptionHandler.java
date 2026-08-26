@@ -1,6 +1,5 @@
 package com.comprasco.bakeprofit.exception.handler;
 
-import com.comprasco.bakeprofit.dto.LoginRequest;
 import com.comprasco.bakeprofit.exception.EmailAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.InvalidCredentialsException;
 import com.comprasco.bakeprofit.exception.UserNotFoundException;
