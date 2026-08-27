@@ -12,4 +12,18 @@ body:
     \  \"password\": \"123541213\"\r
 
     }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code es 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Respuesta incluye token\", function () {\r
+
+      \    pm.expect(pm.response.json()).to.have.property(\"token\");\r
+
+      });\r\n"
+    language: text/javascript
 order: 3632000272059320

@@ -14,4 +14,12 @@ body:
     \  \"password\": \"123541213\"\r
 
     }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code es 409\", function () {\r
+
+      \    pm.response.to.have.status(409);\r
+
+      });"
+    language: text/javascript
 order: 3525958979036508

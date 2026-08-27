@@ -12,4 +12,12 @@ body:
     \  \"password\": \"contraseñaincorrecta\"\r
 
     }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code es 401\", function () {\r
+
+      \    pm.response.to.have.status(401);\r
+
+      });"
+    language: text/javascript
 order: 4384270837290348
