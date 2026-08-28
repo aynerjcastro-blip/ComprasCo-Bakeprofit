@@ -36,6 +36,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
+    @Column(nullable = false)
+    private String password;
+
     /*
      * TODO:Podria cambiar lo de manejar un Enum para los roles.
      */
