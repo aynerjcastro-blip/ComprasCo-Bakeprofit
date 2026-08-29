@@ -12,7 +12,11 @@
         rel="stylesheet">
     <link rel="preload" href="/frontend/styles/normalize.css" as="stylesheet">
     <link rel="stylesheet" href="/frontend/styles/normalize.css">
-    <link rel="stylesheet" href="/frontend/styles/style.css">
+    <!-- index.html -->
+    <link rel="stylesheet" href="/frontend/styles/token.css">
+    <link rel="stylesheet" href="/frontend/styles/base.css">
+    <link rel="stylesheet" href="/frontend/styles/layout.css">
+    <link rel="stylesheet" href="/frontend/styles/pages/home.css">
 </head>
 
 <body>
@@ -34,7 +38,7 @@
             <a href="#sobre-nosotros">Sobre Nosotros</a>
             <a href="#como-funciona">Como funciona</a>
             <a href="#testimonios">Testimonios</a>
-            <a href="#registro">Registrarse</a>
+            <a href="pages/register.html">Registrarse</a>
         </ul>
     </nav>
 
@@ -125,33 +129,7 @@
             <button class="testimonials__button">Encuentra más Opiniones</button>
         </div>
 
-        <div id="registro" class="auth-form-wrapper">
-            <form class="auth-form">
-                <div class="auth-form__field">
-                    <label class="auth-form__label" for="register-name">Nombre:</label>
-                    <input type="text" id="register-name" name="name" required>
-                </div>
-                <div class="auth-form__field">
-                    <label class="auth-form__label" for="register-email">Correo:</label>
-                    <input type="email" id="register-email" name="email" required>
-                </div>
-                <div class="auth-form__field">
-                    <label class="auth-form__label" for="register-phone">Número:</label>
-                    <input type="number" id="register-phone" name="phone">
-                </div>
-                <div class="auth-form__field">
-                    <label class="auth-form__label" for="register-password">Contraseña:</label>
-                    <input type="password" id="register-password" name="password" required>
-                </div>
 
-                <div class="auth-form__terms">
-                    <input type="checkbox" id="register-terms" name="terms" required>
-                    <span>Aceptar los términos y condiciones</span>
-                </div>
-
-                <button type="submit" class="auth-form__submit">Registrarse</button>
-            </form>
-        </div>
     </section>
 
     <footer class="site-footer">
