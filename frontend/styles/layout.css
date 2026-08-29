@@ -29,10 +29,8 @@
 }
 
 .site-header__title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--color-dark);
+    display: flex;
+    align-items: center;
 }
 
 .header-actions {
@@ -40,6 +38,16 @@
     gap: 16px;
     align-items: center;
 }
+
+/* ============================================================
+   Titulo
+   ============================================================ */
+.logo-img {
+    height: 32px; /* ajusta según el tamaño real que quieras en el header */
+    width: auto;
+    display: block;
+}
+
 
 /* ============================================================
    NAVEGACION
