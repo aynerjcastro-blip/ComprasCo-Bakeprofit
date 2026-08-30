@@ -4,6 +4,7 @@ import com.comprasco.bakeprofit.entity.Category;
 import com.comprasco.bakeprofit.exception.CategoryAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.CategoryNotFoundException;
 import com.comprasco.bakeprofit.repository.CategoryRepository;
+import com.comprasco.bakeprofit.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
-    public CategoryService (CategoryRepository categoryRepository) {
+    public CategoryService (CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
     }
 
     /* CONSULTAS */
@@ -25,13 +28,21 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public List<Category> findActive () {
+        return categoryRepository.findByActiveTrue();
+    }
+
+    public List<Category> findInactive () {
+        return categoryRepository.findByActiveFalse();
+    }
+
     public Category findById (Long id) {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException("Categoria no encontrada con id: " + id));
     }
 
     public List<Category> searchByName (String name) {
-        return categoryRepository.findByNameContainingIgnoreCase(name);
+        return categoryRepository.findByNameContainingIgnoreCaseAndActiveTrue(name);
     }
 
     /* ESCRITURA */
@@ -60,14 +71,21 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    /*
-     * TODO: no se implementa delete() todavia.
-     * Product tiene FK obligatoria (nullable = false) hacia Category, asi que
-     * borrar una categoria con productos asociados rompe integridad referencial
-     * en la base de datos. Resolverlo bien implica decidir si se bloquea el borrado
-     * cuando existen productos asociados (lo que obliga a que CategoryService dependa
-     * de ProductRepository, acoplando el modulo de Categoria con el de Producto) o si
-     * se hace soft-delete en su lugar. No esta en el checklist de esta tarea, queda
-     * pendiente de decisión con el equipo.
-     */
+    @Transactional
+    public void activateCategory (Long id) {
+        Category category = findById(id);
+        category.setActive(true);
+        productRepository.updateActiveByCategoryId(id, true);
+
+        categoryRepository.save(category);
+    }
+
+    @Transactional
+    public void deactivateCategory (Long id) {
+        Category category = findById(id);
+        category.setActive(false);
+        productRepository.updateActiveByCategoryId(id, false);
+
+        categoryRepository.save(category);
+    }
 }
