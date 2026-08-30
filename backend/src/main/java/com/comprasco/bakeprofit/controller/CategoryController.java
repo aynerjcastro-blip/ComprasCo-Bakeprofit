@@ -29,6 +29,16 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findById(id));
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<List<Category>> findActive() {
+        return ResponseEntity.ok(categoryService.findActive());
+    }
+
+    @GetMapping("/inactive")
+    public ResponseEntity<List<Category>> findInactive() {
+        return ResponseEntity.ok(categoryService.findInactive());
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<Category>> search(@RequestParam String name) {
         return ResponseEntity.ok(categoryService.searchByName(name));
@@ -42,6 +52,18 @@ public class CategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody CategoryRequest request) {
         categoryService.update(id, request.name());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/deactivate")
+    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+        categoryService.deactivateCategory(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/activate")
+    public ResponseEntity<Void> activate(@PathVariable Long id) {
+        categoryService.activateCategory(id);
         return ResponseEntity.noContent().build();
     }
 }
