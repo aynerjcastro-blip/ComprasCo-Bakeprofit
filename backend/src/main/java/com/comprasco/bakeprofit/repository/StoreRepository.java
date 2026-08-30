@@ -9,11 +9,7 @@ import java.util.Optional;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
-    List<Store> findByNameContainingIgnoreCase (String name);
-
-    List<Store> findByCityContainingIgnoreCase (String city);
-
-    List<Store> findByNameContainingIgnoreCaseAndCityContainingIgnoreCase(String name, String city);
+    List<Store> findByNameContainingIgnoreCaseAndActiveTrue (String name);
 
     List<Store> findByActiveTrue ();
 

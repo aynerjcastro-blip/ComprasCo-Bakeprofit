@@ -25,8 +25,6 @@ public class Store {
     @Column(nullable = false)
     private String name;
 
-    private String city;
-
     private Boolean active = true;
 
     private LocalDateTime registrationDate = LocalDateTime.now();

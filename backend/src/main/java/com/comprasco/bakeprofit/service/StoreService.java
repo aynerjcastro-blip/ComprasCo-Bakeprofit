@@ -30,19 +30,8 @@ public class StoreService {
                 .orElseThrow(() -> new StoreNotFoundException("Tienda no encontrada con id: " + id));
     }
 
-    public List<Store> search(String name, String city) {
-        boolean hasName = name != null && !name.isBlank();
-        boolean hasCity = city != null && !city.isBlank();
-
-        if (hasName && hasCity) {
-            return storeRepository.findByNameContainingIgnoreCaseAndCityContainingIgnoreCase(name, city);
-        } else if (hasName) {
-            return storeRepository.findByNameContainingIgnoreCase(name);
-        } else if (hasCity) {
-            return storeRepository.findByCityContainingIgnoreCase(city);
-        }
-
-        return storeRepository.findAll();
+    public List<Store> searchByName(String name) {
+        return storeRepository.findByNameContainingIgnoreCaseAndActiveTrue(name);
     }
 
     public List<Store> findActive () {
@@ -56,20 +45,19 @@ public class StoreService {
     /* ESCRITURA */
 
     @Transactional
-    public Store create (String name, String city) {
+    public Store create (String name) {
         if (storeRepository.existsByNameIgnoreCase(name)) {
             throw new StoreAlreadyExistsException(name);
         }
 
         Store store = new Store();
         store.setName(name);
-        store.setCity(city);
 
         return storeRepository.save(store);
     }
 
     @Transactional
-    public Store update(Long id, String name, String city) {
+    public Store update(Long id, String name) {
         Store store = findById(id);
 
         if (storeRepository.existsByNameIgnoreCaseAndIdNot(name, id)) {
@@ -77,7 +65,6 @@ public class StoreService {
         }
 
         store.setName(name);
-        store.setCity(city);
 
         return storeRepository.save(store);
     }
@@ -86,11 +73,15 @@ public class StoreService {
     public void deactivateStore (Long id) {
         Store store = findById(id);
         store.setActive(false);
+
+        storeRepository.save(store);
     }
 
     @Transactional
     public void activateStore (Long id) {
         Store store = findById(id);
         store.setActive(true);
+
+        storeRepository.save(store);
     }
 }

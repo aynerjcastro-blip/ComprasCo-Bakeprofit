@@ -30,9 +30,8 @@ public class StoreController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Store>> search(@RequestParam(required = false) String name,
-                                            @RequestParam(required = false) String city) {
-        return ResponseEntity.ok(storeService.search(name, city));
+    public ResponseEntity<List<Store>> search(@RequestParam String name) {
+        return ResponseEntity.ok(storeService.searchByName(name));
     }
 
     @GetMapping("/active")
@@ -47,12 +46,12 @@ public class StoreController {
 
     @PostMapping
     public ResponseEntity<Store> create(@Valid @RequestBody StoreRequest request) {
-        return ResponseEntity.ok(storeService.create(request.name(), request.city()));
+        return ResponseEntity.ok(storeService.create(request.name()));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody StoreRequest request) {
-        storeService.update(id, request.name(), request.city());
+        storeService.update(id, request.name());
         return ResponseEntity.noContent().build();
     }
 
