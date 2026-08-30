@@ -7,6 +7,7 @@ import com.comprasco.bakeprofit.exception.CategoryAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.CategoryNotFoundException;
 import com.comprasco.bakeprofit.exception.StoreAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.StoreNotFoundException;
+import com.comprasco.bakeprofit.exception.ProductNotFoundException;
 import com.comprasco.bakeprofit.exception.response.ErrorResponse;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -50,7 +51,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({ UserNotFoundException.class, EntityNotFoundException.class, 
-                        CategoryNotFoundException.class, StoreNotFoundException.class
+                        CategoryNotFoundException.class, StoreNotFoundException.class,
+                        ProductNotFoundException.class
     })
     public ResponseEntity<ErrorResponse> handleNotFound(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(
