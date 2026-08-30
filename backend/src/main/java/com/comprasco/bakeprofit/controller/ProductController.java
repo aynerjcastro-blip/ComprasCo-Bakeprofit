@@ -7,6 +7,7 @@ import com.comprasco.bakeprofit.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.net.URI;
 
 import java.util.List;
 
@@ -48,7 +49,10 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductResponse> create (@Valid @RequestBody ProductRequest request) {
-        return ResponseEntity.ok(productService.create(request.name(), request.unit(), request.idCategory()));
+        ProductResponse response = productService.create(request.name(), request.unit(), request.idCategory());
+        return ResponseEntity
+                .created(URI.create("/api/products/" + response.id()))
+                .body(response);
     }
 
     @PutMapping("/{id}")

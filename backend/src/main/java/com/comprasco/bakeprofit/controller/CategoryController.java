@@ -6,6 +6,7 @@ import com.comprasco.bakeprofit.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.net.URI;
 
 import java.util.List;
 
@@ -46,7 +47,10 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<Category> create(@Valid @RequestBody CategoryRequest request) {
-        return ResponseEntity.ok(categoryService.create(request.name()));
+        Category category = categoryService.create(request.name());
+        return ResponseEntity
+                    .created(URI.create("api/categories" + category.getId()))
+                    .body(category);
     }
 
     @PutMapping("/{id}")

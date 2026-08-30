@@ -6,6 +6,7 @@ import com.comprasco.bakeprofit.service.StoreService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.net.URI;
 
 import java.util.List;
 
@@ -46,7 +47,10 @@ public class StoreController {
 
     @PostMapping
     public ResponseEntity<Store> create(@Valid @RequestBody StoreRequest request) {
-        return ResponseEntity.ok(storeService.create(request.name()));
+        Store store = storeService.create(request.name());
+        return ResponseEntity
+                .created(URI.create("api/stores/" + store.getId()))
+                .body(store);
     }
 
     @PutMapping("/{id}")
