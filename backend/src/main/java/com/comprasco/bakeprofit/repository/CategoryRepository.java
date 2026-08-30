@@ -9,7 +9,11 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     // Buscar por nombre (coincidencia parcial, sin distinguir mayúsculas/minúsculas)
-    List<Category> findByNameContainingIgnoreCase (String name);
+    List<Category> findByNameContainingIgnoreCaseAndActiveTrue (String name);
+
+    List<Category> findByActiveTrue ();
+
+    List<Category> findByActiveFalse ();
 
     boolean existsByNameIgnoreCase(String name);
 
