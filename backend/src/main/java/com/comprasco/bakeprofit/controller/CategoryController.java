@@ -49,7 +49,7 @@ public class CategoryController {
     public ResponseEntity<Category> create(@Valid @RequestBody CategoryRequest request) {
         Category category = categoryService.create(request.name());
         return ResponseEntity
-                    .created(URI.create("api/categories" + category.getId()))
+                    .created(URI.create("api/categories/" + category.getId()))
                     .body(category);
     }
 
