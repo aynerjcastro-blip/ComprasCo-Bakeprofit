@@ -15,6 +15,7 @@
     /* Texto */
     --text-primary: #0F172A;
     --text-muted: #64748B;
+    --text-alternative: #FFF;
 
     /* Marca (nombres semánticos, no por apariencia) */
     --color-primary: #FF9F1C;
