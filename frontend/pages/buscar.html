@@ -13,7 +13,7 @@
     <link rel="preload" href="/frontend/styles/normalize.css" as="stylesheet">
     <link rel="stylesheet" href="/frontend/styles/normalize.css">
     <!-- buscar.html -->
-    <link rel="stylesheet" href="/frontend/styles/token.css">
+    <link rel="stylesheet" href="/frontend/styles/tokens.css">
     <link rel="stylesheet" href="/frontend/styles/base.css">
     <link rel="stylesheet" href="/frontend/styles/layout.css">
     <link rel="stylesheet" href="/frontend/styles/pages/buscar.css">
@@ -28,8 +28,12 @@
                 <img src="/frontend/assets/images/titulo-preciosCo.png" alt="PreciosCo" class="logo-img">
             </a>
             <div class="header-actions">
-                <img src="/frontend/assets/icons/find.png" alt="Buscar" width="30">
-                <img src="/frontend/assets/icons/user.png" alt="Mi cuenta" width="30">
+                <a href="/frontend/pages/buscar.html">
+                    <img src="/frontend/assets/icons/find.png" alt="Buscar" width="30">
+                </a>
+                <a href="/frontend/pages/login.html">
+                    <img src="/frontend/assets/icons/user.png" alt="Iniciar sesion" width="30" >
+                </a>
             </div>
         </div>
     </header>
@@ -71,7 +75,7 @@
     </footer>
 
     <script src="/frontend/js/config.js" defer></script>
-    <script src="/frontend/js/buscar.js" defer></script>
+    <script src="/frontend/js/ui/buscar.js" defer></script>
 </body>
 
 </html>
