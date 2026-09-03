@@ -10,10 +10,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600&display=swap"
         rel="stylesheet">
-    <link rel="preload" href="/frontend/styles/normalize.css" as="stylesheet">
+    <link rel="preload" href="/frontend/styles/normalize.css" as="style">
     <link rel="stylesheet" href="/frontend/styles/normalize.css">
     <!-- index.html -->
-    <link rel="stylesheet" href="/frontend/styles/token.css">
+    <link rel="stylesheet" href="/frontend/styles/tokens.css">
     <link rel="stylesheet" href="/frontend/styles/base.css">
     <link rel="stylesheet" href="/frontend/styles/layout.css">
     <link rel="stylesheet" href="/frontend/styles/pages/home.css">
@@ -27,8 +27,12 @@
                 <img src="/frontend/assets/images/titulo-preciosCo.png" alt="PreciosCo" class="logo-img">
             </a>
             <div class="header-actions">
-                <img src="/frontend/assets/icons/find.png" alt="Buscar" width="30">
-                <img src="/frontend/assets/icons/user.png" alt="Iniciar sesion" width="30" >
+                <a href="/frontend/pages/buscar.html">
+                    <img src="/frontend/assets/icons/find.png" alt="Buscar" width="30">
+                </a>
+                <a href="/frontend/pages/login.html">
+                    <img src="/frontend/assets/icons/user.png" alt="Iniciar sesion" width="30" >
+                </a>
             </div>
         </div>
     </header>

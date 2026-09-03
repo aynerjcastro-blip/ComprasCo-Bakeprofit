@@ -3,6 +3,11 @@ package com.comprasco.bakeprofit.exception.handler;
 import com.comprasco.bakeprofit.exception.EmailAlreadyExistsException;
 import com.comprasco.bakeprofit.exception.InvalidCredentialsException;
 import com.comprasco.bakeprofit.exception.UserNotFoundException;
+import com.comprasco.bakeprofit.exception.CategoryAlreadyExistsException;
+import com.comprasco.bakeprofit.exception.CategoryNotFoundException;
+import com.comprasco.bakeprofit.exception.StoreAlreadyExistsException;
+import com.comprasco.bakeprofit.exception.StoreNotFoundException;
+import com.comprasco.bakeprofit.exception.ProductNotFoundException;
 import com.comprasco.bakeprofit.exception.response.ErrorResponse;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -27,7 +32,28 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
-    @ExceptionHandler({ UserNotFoundException.class, EntityNotFoundException.class })
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleCategoryAlreadyExists(CategoryAlreadyExistsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(), // 409
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(StoreAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleStoreAlreadyExists(StoreAlreadyExistsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(), // 409
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler({ UserNotFoundException.class, EntityNotFoundException.class, 
+                        CategoryNotFoundException.class, StoreNotFoundException.class,
+                        ProductNotFoundException.class
+    })
     public ResponseEntity<ErrorResponse> handleNotFound(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(), // 404

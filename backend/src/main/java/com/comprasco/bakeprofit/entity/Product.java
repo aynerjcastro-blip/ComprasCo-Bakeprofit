@@ -27,7 +27,9 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    private String unidad;
+    private String unit;
+
+    private Boolean active = true;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_product_category"))

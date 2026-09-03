@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Buscar productos · PreciosCo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,12 +12,12 @@
         rel="stylesheet">
     <link rel="preload" href="/frontend/styles/normalize.css" as="stylesheet">
     <link rel="stylesheet" href="/frontend/styles/normalize.css">
-    <!-- login.html / registro.html -->
+    <!-- buscar.html -->
     <link rel="stylesheet" href="/frontend/styles/tokens.css">
     <link rel="stylesheet" href="/frontend/styles/base.css">
     <link rel="stylesheet" href="/frontend/styles/layout.css">
-    <link rel="stylesheet" href="/frontend/styles/forms.css">
-    <script type="module" src="/frontend/js/ui/login.js"></script>
+    <link rel="stylesheet" href="/frontend/styles/pages/buscar.css">
+    <link rel="stylesheet" href="/frontend/styles/responsive.css">
 </head>
 
 <body>
@@ -31,30 +31,36 @@
                 <a href="/frontend/pages/buscar.html">
                     <img src="/frontend/assets/icons/find.png" alt="Buscar" width="30">
                 </a>
-                <img src="/frontend/assets/icons/user.png" alt="Mi cuenta" width="30">
+                <a href="/frontend/pages/login.html">
+                    <img src="/frontend/assets/icons/user.png" alt="Iniciar sesion" width="30" >
+                </a>
             </div>
         </div>
     </header>
 
+    <main class="search-page">
+        <div class="search-page__container">
+            <h1 class="search-page__title">Busca tu producto</h1>
+            <p class="search-page__subtitle">Escribe un nombre o filtra por categoría</p>
 
-    <div class="auth-form-wrapper">
-        <form class="auth-form">
-            <div class="auth-form__field">
-                <label class="auth-form__label" for="login-email">Correo:</label>
-                <input type="email" id="login-email" name="email" required>
+            <div class="search-bar">
+                <input
+                    type="search"
+                    id="search-input"
+                    class="search-bar__input"
+                    placeholder="Ej. Arroz, Leche, Chocolatina..."
+                    aria-label="Buscar producto por nombre">
             </div>
-            <div class="auth-form__field">
-                <label class="auth-form__label" for="login-password">Contraseña:</label>
-                <input type="password" id="login-password" name="password" required>
+
+            <div class="category-filter" id="category-filter" aria-label="Filtrar por categoría">
+                <!-- Los chips de categoría se insertan dinámicamente desde buscar.js -->
             </div>
 
-            <button type="submit" class="auth-form__submit">Iniciar sesión</button>
-
-            <p class="auth-form__switch">
-                ¿No tienes cuenta? <a href="/frontend/pages/register.html">Regístrate</a>
-            </p>
-        </form>
-    </div>
+            <div class="search-results" id="search-results" aria-live="polite">
+                <!-- Los resultados se insertan dinámicamente desde buscar.js -->
+            </div>
+        </div>
+    </main>
 
     <footer class="site-footer">
         <ul class="site-footer__links">
@@ -67,6 +73,9 @@
         </ul>
         <h5 class="site-footer__copy">Todos los derechos reservados</h5>
     </footer>
+
+    <script src="/frontend/js/config.js" defer></script>
+    <script src="/frontend/js/ui/buscar.js" defer></script>
 </body>
 
 </html>
